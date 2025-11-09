@@ -1,2 +1,1 @@
-# my_blog
-# my_blog
+# This is my first python + flask web project
