@@ -6,3 +6,6 @@ Flask-SQLAlchemy==3.1.1
 Flask-WTF==1.2.1 #支持用户表单提交
 flask-login==0.6.3 #记录用户信息到session，再请求时再校验session是否有用户信息
 bcrypt==5.0.0
+pip==24.3.1
+pymysql==1.1.2
+jinja2==3.1.6
