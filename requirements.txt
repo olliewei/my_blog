@@ -1,0 +1,8 @@
+wtforms==3.2.1
+Flask==3.1.2
+mysqlclient==2.2.7
+SQLAlchemy==2.0.44
+Flask-SQLAlchemy==3.1.1
+Flask-WTF==1.2.1 #支持用户表单提交
+flask-login==0.6.3 #记录用户信息到session，再请求时再校验session是否有用户信息
+bcrypt==5.0.0

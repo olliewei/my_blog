@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Ollie's Blog — Log In
+{% endblock %}
+
+{% block content %}
+<div class="container-xl d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+    <div class="card shadow-sm p-4" style="max-width: 420px; width: 100%; background-color: #f9fbfd;">
+        <form method="POST" class="form-signup">
+            {{ form.hidden_tag() }}
+
+            <h2 class="text-center mb-4 fw-bold">Log In</h2>
+
+            <div class="mb-3">
+                {{ form.username.label(class='form-label fw-semibold') }}
+                {{ form.username(class='form-control', placeholder='Enter your username') }}
+            </div>
+
+            <div class="mb-3">
+                {{ form.password.label(class='form-label fw-semibold') }}
+                {{ form.password(class='form-control', placeholder='Enter your password') }}
+            </div>
+
+            <div class="d-grid mt-4">
+                {{ form.submit(class='btn btn-primary btn-block fw-semibold') }}
+            </div>
+
+            <div class="text-center mt-3">
+                <small>
+                    <a href="{{ url_for('signup_page') }}" class="text-decoration-none">Create Account</a>
+                </small>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

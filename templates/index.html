@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Ollie's Blog - Home Page
+{% endblock %}
+
+{% block content %}
+<style>
+/* 卡片两列布局 */
+.row-articles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* 卡片间距 */
+}
+.article-card {
+    flex: 0 0 calc(50% - 10px); /* 两列布局，左右间隔各10px */
+    background-color: #ecf2f9;
+    display: flex;              /* ✅ 让 card 自身也能伸展 */
+    flex-direction: column;     /* ✅ 让内部布局竖直方向延展 */
+}
+
+/* 限制文章内容显示高度，多余内容省略 */
+.card-text-truncate {
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* 显示3行内容，可调整 */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+    line-height: 1.5rem;
+    min-height: calc(1.5rem * 2); /* ✅ 固定三行高度 */
+}
+.card-text-truncate a {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: inherit;
+    text-decoration: none;
+    line-height: 1.5rem;
+    min-height: calc(1.5rem * 2); /* ✅ 固定三行高度 */
+}
+.card-text-truncate a:hover {
+    text-decoration: underline;
+}
+</style>
+
+<!-- ✅ 搜索框 -->
+<div class="container mt-4">
+    <form id="search-form" class="d-flex mb-3">
+        <input type="text" id="search-input" class="form-control me-2" placeholder="Search Article..." value="{{ search }}">
+        <button type="submit" class="btn btn-outline-primary btn-sm">Search</button>
+    </form>
+</div>
+
+<div class="container-xl row-articles" id="articles-container">
+    {% for article in articles %}
+        <div class="card article-card mt-4">
+            <div class="card-header">
+                <a class="btn fs-5 fw-bold" href="article/{{ article.id }}.html">{{ article.title }}</a>
+            </div>
+            <div class="card-body">
+                <p class="card-text card-text-truncate">
+                    <a class="btn fs-6" href="article/{{ article.id }}.html">{{ article.content }}</a>
+                </p>
+                <div class="text-body-secondary small mt-2">
+                    {{ article.author }} | {{ article.create_time.strftime("%Y-%m-%d %H:%M:%S") }}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+<script>
+    // ✅ 提供后端传入的初始分页信息
+    window.nextPage = {{ next_page if next_page else 'null' }};
+    window.hasNext = {{ 'true' if pagination else 'false' }};
+    window.loadUrl = "/"; // 你可以换成任意分页接口
+    window.searchKeyword = {{ search|tojson }};
+</script>
+<script src="/assets/js/infinite_scroll.js"></script>
+
+<script>
+$('#search-form').on('submit', function(e) {
+    e.preventDefault();
+    window.searchKeyword = $('#search-input').val(); // 更新搜索关键字
+    window.nextPage = 1;                             // 重置分页
+    $('#articles-container').empty();                // 清空列表
+    if (typeof window.loadMoreArticles === 'function') {
+            window.loadMoreArticles();  // ✅ 防止未定义时报错
+        } else {
+            console.error("⚠️ loadMoreArticles 未定义，请检查 infinite_scroll.js 加载顺序。");
+        }                              // 调用加载函数
+});
+</script>
+{% endblock %}

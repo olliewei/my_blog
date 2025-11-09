@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+
+{% block title%}
+Ollie's Blog -
+    {% if is_edit %}
+        Edit Article
+    {% else %}
+        Create Article
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<style>
+    .content_height{
+        height:550px;
+    }
+</style>
+<div class = "container-fluid px-4">
+    <form method="POST" class="form-signin">
+        {{ form.hidden_tag()}}
+        {% if is_edit %}
+            <h1 class="h3 mb-3 font-weight-normal text-center" >Edit Article</h1>
+        {% else%}
+            <h1 class="h3 mb-3 font-weight-normal text-center" >Create Article</h1>
+        {% endif %}
+        <br>
+        {{ form.title.label() }}
+        {{ form.title(class="form-control", placeholder="Title") }}
+        {{ form.author(type="hidden", value=current_user.username) }}
+        <br>
+        <div class="row">
+            <div class="col">
+                {{ form.content.label() }}
+                {{ form.content(id='article_content',class="form-control content_height", placeholder="Content") }}
+            </div>
+            <div class="col">Preview
+                <div class="container-fluid border border-success" style="overflow: auto">
+                    <div id="article_preview" class="content_height"></div>
+                </div>
+            </div>
+
+        </div>
+        <br>
+        <div class="text-center">
+<!--preview btn去掉，改成自动preview：<a href="#" id="article_preview_btn" class="btn btn-outline-primary btn-sm me-2">Preview</a>-->
+            {% if is_edit %}
+                <a href="{{url_for('article_page', article_id = article.id)}}" class="btn btn-outline-primary btn-sm me-2">Cancel</a>
+            {% else%}
+                <a href="{{url_for('home_page')}}" class="btn btn-outline-primary btn-sm me-2">Cancel</a>
+            {% endif %}
+            {{ form.submit(class="btn btn-outline-primary btn-sm me-2")}}
+        </div>
+    </form>
+</div>
+<script src="/assets/js/editarticle.js"></script>
+{% endblock %}

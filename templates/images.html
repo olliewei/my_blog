@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Ollie's Blog -- Upload Image
+{% endblock %}
+
+{% block content %}
+<div class="container-xl">
+    <form method="POST" class="form-signin" enctype="multipart/form-data">
+        {{form.hidden_tag()}}
+        <h1 class="h3 font-weight-normal">
+            Upload Image
+        </h1>
+        <br>
+        {{form.image_file.label()}}
+        {{form.image_file(class='form-control')}}
+        <br>
+        {{form.submit(class='btn btn-outline-primary btn-sm me-2')}}
+    </form>
+</div>
+{% endblock %}
