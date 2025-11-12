@@ -6,6 +6,17 @@
     <meta charset="UTF-8">
     <meta name = 'viewport' content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
+
+    <!-- 添加字体链接 -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Prism.js 语法高亮 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/components/prism-python.min.js"></script>
+
     <script src="/assets/plugin/jQuery-371/jquery.min.js"></script>
     <link rel="stylesheet" href="/assets/plugin/bootstrap-538/bootstrap.min.css">
     <script src="/assets/plugin/bootstrap-538/bootstrap.bundle.min.js"></script>
@@ -14,6 +25,102 @@
         {% block title%}
         {% endblock %}
     </title>
+    <style>
+    /* GitHub 风格代码样式 */
+    #article_viewer pre {
+        background: #f6f8fa !important;
+        border: 1px solid #e1e4e8 !important;
+        border-radius: 6px !important;
+        padding: 16px !important;
+        overflow-x: auto !important;
+        margin: 16px 0 !important;
+        font-family: 'SFMono-Regular', 'Consolas', 'Liberation Mono', 'Menlo', 'Monaco', 'Courier New', monospace !important;
+        font-size: 13px !important;
+        line-height: 1.45 !important;
+        color: #24292e !important;
+        position: relative !important;
+    }
+
+    #article_viewer code {
+        font-family: 'SFMono-Regular', 'Consolas', 'Liberation Mono', 'Menlo', 'Monaco', 'Courier New', monospace !important;
+        font-size: 13px !important;
+        padding: 0.2em 0.4em !important;
+    }
+
+    #article_viewer pre code {
+        background: transparent !important;
+        padding: 0 !important;
+        color: inherit !important;
+        display: block !important;
+        white-space: pre !important;
+    }
+
+    /* 行内代码 */
+    #article_viewer :not(pre) > code {
+        background: rgba(175, 184, 193, 0.2) !important;
+        color: #24292e !important;
+        padding: 0.2em 0.4em !important;
+        border-radius: 3px !important;
+        font-size: 85% !important;
+        border: none !important;
+    }
+
+    /* GitHub 风格的语法高亮 */
+    .token.keyword { color: #d73a49 !important; } /* 关键字 - 红色 */
+    .token.function { color: #6f42c1 !important; } /* 函数名 - 紫色 */
+    .token.string { color: #6A8759 !important; } /* 字符串 - 绿色 */
+    .token.number { color: #005cc5 !important; } /* 数字 - 蓝色 */
+    .token.comment { color: #6a737d !important; } /* 注释 - 灰色 */
+    .token.class-name { color: #6f42c1 !important; } /* 类名 - 紫色 */
+    .token.operator { color: #d73a49 !important; } /* 操作符 - 红色 */
+    .token.punctuation { color: #24292e !important; } /* 标点 - 黑色 */
+    .token.boolean { color: #005cc5 !important; } /* 布尔值 - 蓝色 */
+    .token.keyword-null { color: #005cc5 !important; } /* null - 蓝色 */
+    .token.keyword-this { color: #e36209 !important; } /* this - 橙色 */
+    .token.keyword-function { color: #d73a49 !important; } /* function - 红色 */
+
+    /* 特定语言的调整 */
+    .language-python .token.function { color: #6f42c1 !important; }
+    .language-python .token.builtin { color: #e36209 !important; } /* 内置函数 - 橙色 */
+
+    .language-javascript .token.function { color: #6f42c1 !important; }
+    .language-javascript .token.constant { color: #005cc5 !important; }
+
+    /* 滚动条样式 */
+    #article_viewer pre::-webkit-scrollbar {
+        height: 8px;
+        background: #f6f8fa;
+    }
+
+    #article_viewer pre::-webkit-scrollbar-thumb {
+        background: #d1d5da;
+        border-radius: 4px;
+    }
+
+    #article_viewer pre::-webkit-scrollbar-thumb:hover {
+        background: #959da5;
+    }
+
+    /* 代码块标题（可选） */
+    #article_viewer pre[class*="language-"] {
+        position: relative;
+    }
+
+    #article_viewer pre[class*="language-"]::before {
+        content: attr(class);
+        position: absolute;
+        top: 0;
+        right: 0;
+        background: #e1e4e8;
+        color: #6a737d;
+        padding: 4px 8px;
+        font-size: 11px;
+        font-weight: 600;
+        border-bottom-left-radius: 6px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
